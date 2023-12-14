@@ -14,7 +14,7 @@ public class SentimentDbContext : DbContext
     {
         // Configure Sentiment and SentimentAnalysisResult relationship (1-1)
         modelBuilder.Entity<Sentiment>()
-            .HasOne(s => s.SentimentAnalysisResult)
+            .HasOne(s => s.AnalysisResult)
             .WithOne(sar => sar.Sentiment)
             .HasForeignKey<SentimentAnalysisResult>(sar => sar.SentimentId);
 

@@ -26,8 +26,7 @@ namespace Startups
             {
                 options.UseMySql(
                     Configuration.GetConnectionString("DefaultConnection"),
-                    new MariaDbServerVersion(new Version(8, 0, 30)),
-                    mySqlOptions => mySqlOptions.CharSetBehavior(CharSetBehavior.NeverAppend)
+                    new MariaDbServerVersion(new Version(8, 0, 30))
                 );
             });
 
@@ -50,7 +49,7 @@ namespace Startups
 
             app.UseAuthorization();
 
-            app.MapControllers();
+           // app.MapControllers();
         }
     }
 }

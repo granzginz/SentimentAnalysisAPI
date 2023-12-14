@@ -8,7 +8,7 @@ internal class Program
 
         var app = builder.Build();
 
-        app.UseStartup<Startup>();
+        //app.UseStartup<Startup>();
 
         app.Run();
     }
