@@ -1,0 +1,93 @@
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+[ApiController]
+[Route("api/[controller]")]
+public class SentimentAnalysisResultController : ControllerBase
+{
+    private readonly SentimentDbContext _context;
+
+        public SentimentAnalysisResultController(SentimentDbContext context)
+            {
+                    _context = context;
+                        }
+
+                            [HttpGet]
+                                public async Task<ActionResult<IEnumerable<SentimentAnalysisResult>>> GetSentimentAnalysisResults()
+                                    {
+                                            return await _context.SentimentAnalysisResults.ToListAsync();
+                                                }
+
+                                                    [HttpGet("{id}")]
+                                                        public async Task<ActionResult<SentimentAnalysisResult>> GetSentimentAnalysisResult(int id)
+                                                            {
+                                                                    var sentimentAnalysisResult = await _context.SentimentAnalysisResults.FindAsync(id);
+
+                                                                            if (sentimentAnalysisResult == null)
+                                                                                    {
+                                                                                                return NotFound();
+                                                                                                        }
+
+                                                                                                                return sentimentAnalysisResult;
+                                                                                                                    }
+
+                                                                                                                        [HttpPost]
+                                                                                                                            public async Task<ActionResult<SentimentAnalysisResult>> PostSentimentAnalysisResult(SentimentAnalysisResult sentimentAnalysisResult)
+                                                                                                                                {
+                                                                                                                                        _context.SentimentAnalysisResults.Add(sentimentAnalysisResult);
+                                                                                                                                                await _context.SaveChangesAsync();
+
+                                                                                                                                                        return CreatedAtAction(nameof(GetSentimentAnalysisResult), new { id = sentimentAnalysisResult.Id }, sentimentAnalysisResult);
+                                                                                                                                                            }
+
+                                                                                                                                                                [HttpPut("{id}")]
+                                                                                                                                                                    public async Task<IActionResult> PutSentimentAnalysisResult(int id, SentimentAnalysisResult sentimentAnalysisResult)
+                                                                                                                                                                        {
+                                                                                                                                                                                if (id != sentimentAnalysisResult.Id)
+                                                                                                                                                                                        {
+                                                                                                                                                                                                    return BadRequest();
+                                                                                                                                                                                                            }
+
+                                                                                                                                                                                                                    _context.Entry(sentimentAnalysisResult).State = EntityState.Modified;
+
+                                                                                                                                                                                                                            try
+                                                                                                                                                                                                                                    {
+                                                                                                                                                                                                                                                await _context.SaveChangesAsync();
+                                                                                                                                                                                                                                                        }
+                                                                                                                                                                                                                                                                catch (DbUpdateConcurrencyException)
+                                                                                                                                                                                                                                                                        {
+                                                                                                                                                                                                                                                                                    if (!SentimentAnalysisResultExists(id))
+                                                                                                                                                                                                                                                                                                {
+                                                                                                                                                                                                                                                                                                                return NotFound();
+                                                                                                                                                                                                                                                                                                                            }
+                                                                                                                                                                                                                                                                                                                                        else
+                                                                                                                                                                                                                                                                                                                                                    {
+                                                                                                                                                                                                                                                                                                                                                                    throw;
+                                                                                                                                                                                                                                                                                                                                                                                }
+                                                                                                                                                                                                                                                                                                                                                                                        }
+
+                                                                                                                                                                                                                                                                                                                                                                                                return NoContent();
+                                                                                                                                                                                                                                                                                                                                                                                                    }
+
+                                                                                                                                                                                                                                                                                                                                                                                                        [HttpDelete("{id}")]
+                                                                                                                                                                                                                                                                                                                                                                                                            public async Task<IActionResult> DeleteSentimentAnalysisResult(int id)
+                                                                                                                                                                                                                                                                                                                                                                                                                {
+                                                                                                                                                                                                                                                                                                                                                                                                                        var sentimentAnalysisResult = await _context.SentimentAnalysisResults.FindAsync(id);
+                                                                                                                                                                                                                                                                                                                                                                                                                                if (sentimentAnalysisResult == null)
+                                                                                                                                                                                                                                                                                                                                                                                                                                        {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                    return NotFound();
+                                                                                                                                                                                                                                                                                                                                                                                                                                                            }
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                    _context.SentimentAnalysisResults.Remove(sentimentAnalysisResult);
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                            await _context.SaveChangesAsync();
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    return NoContent();
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        }
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            private bool SentimentAnalysisResultExists(int id)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        return _context.SentimentAnalysisResults.Any(e => e.Id == id);
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            }
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            }

@@ -1,9 +1,0 @@
-// SentimentDbContext.cs
-using Microsoft.EntityFrameworkCore;
-
-public class SentimentDbContext : DbContext
-{
-    public SentimentDbContext(DbContextOptions<SentimentDbContext> options) : base(options) { }
-
-    public DbSet<Sentiment> Sentiments { get; set; }
-}
