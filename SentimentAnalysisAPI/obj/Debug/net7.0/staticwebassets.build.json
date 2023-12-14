@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "9D1zh5lzWlt8wnyF+MEXhGJFwalK2REwEOkNXqK75CQ=",
+  "Source": "SentimentAnalysisAPI",
+  "BasePath": "_content/SentimentAnalysisAPI",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
