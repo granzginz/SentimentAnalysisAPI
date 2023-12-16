@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/workspaces/codespaces-blank/SentimentAnalysisAPI/SentimentAnalysisAPI.csproj": {}
+    "/workspaces/SentimentAnalysisAPI/SentimentAnalysisAPI/SentimentAnalysisAPI.csproj": {}
   },
   "projects": {
-    "/workspaces/codespaces-blank/SentimentAnalysisAPI/SentimentAnalysisAPI.csproj": {
+    "/workspaces/SentimentAnalysisAPI/SentimentAnalysisAPI/SentimentAnalysisAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/workspaces/codespaces-blank/SentimentAnalysisAPI/SentimentAnalysisAPI.csproj",
+        "projectUniqueName": "/workspaces/SentimentAnalysisAPI/SentimentAnalysisAPI/SentimentAnalysisAPI.csproj",
         "projectName": "SentimentAnalysisAPI",
-        "projectPath": "/workspaces/codespaces-blank/SentimentAnalysisAPI/SentimentAnalysisAPI.csproj",
+        "projectPath": "/workspaces/SentimentAnalysisAPI/SentimentAnalysisAPI/SentimentAnalysisAPI.csproj",
         "packagesPath": "/home/codespace/.nuget/packages/",
-        "outputPath": "/workspaces/codespaces-blank/SentimentAnalysisAPI/obj/",
+        "outputPath": "/workspaces/SentimentAnalysisAPI/SentimentAnalysisAPI/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/codespace/.nuget/NuGet/NuGet.Config"

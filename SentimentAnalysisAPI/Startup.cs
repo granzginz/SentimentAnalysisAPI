@@ -20,6 +20,16 @@ namespace Startups
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(builder =>
+                {
+                    builder.AllowAnyOrigin()
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
+                });
+            });
+
             services.AddControllers();
 
             services.AddDbContext<SentimentDbContext>(options =>
@@ -30,7 +40,6 @@ namespace Startups
                 );
             });
 
-            // Swagger configuration
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
         }
@@ -42,14 +51,23 @@ namespace Startups
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Sentiment Analysis API v1"));
+                app.UseSwaggerUI(c =>
+                {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Sentiment Analysis API v1");
+                    c.RoutePrefix = string.Empty;
+                });
+
+                app.UseCors();
+                app.UseHttpsRedirection();
+
+                app.UseAuthorization();
+                app.UseRouting();
+                app.UseEndpoints(endpoints =>
+                {
+                    endpoints.MapControllers();
+                });
+
             }
-
-            app.UseHttpsRedirection();
-
-            app.UseAuthorization();
-
-           // app.MapControllers();
         }
     }
 }

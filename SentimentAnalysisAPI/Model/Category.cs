@@ -4,5 +4,5 @@ public class Category
     public string Name { get; set; }
 
     // One-to-Many Relationship
-    public List<Sentiment> Sentiments { get; set; }
+    //public List<Sentiment> Sentiments { get; set; }
 }
