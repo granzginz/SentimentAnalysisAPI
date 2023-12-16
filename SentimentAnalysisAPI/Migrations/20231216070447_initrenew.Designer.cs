@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace SentimentAnalysisAPI.Migrations
 {
     [DbContext(typeof(SentimentDbContext))]
-    [Migration("20231216005546_initialcreate")]
-    partial class initialcreate
+    [Migration("20231216070447_initrenew")]
+    partial class initrenew
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -54,9 +54,13 @@ namespace SentimentAnalysisAPI.Migrations
                     b.Property<int>("Reposts")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.Property<int>("SentimentAnalysisId")
+                        .HasColumnType("int");
 
-                    b.HasIndex("CategoryId");
+                    b.Property<int>("TagId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
 
                     b.ToTable("Sentiments");
                 });
@@ -76,23 +80,22 @@ namespace SentimentAnalysisAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("SentimentId")
-                        .IsUnique();
-
                     b.ToTable("SentimentAnalysisResults");
                 });
 
             modelBuilder.Entity("SentimentTag", b =>
                 {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
                     b.Property<int>("SentimentId")
                         .HasColumnType("int");
 
                     b.Property<int>("TagId")
                         .HasColumnType("int");
 
-                    b.HasKey("SentimentId", "TagId");
-
-                    b.HasIndex("TagId");
+                    b.HasKey("Id");
 
                     b.ToTable("SentimentTags");
                 });
@@ -110,65 +113,6 @@ namespace SentimentAnalysisAPI.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Tags");
-                });
-
-            modelBuilder.Entity("Sentiment", b =>
-                {
-                    b.HasOne("Category", "Category")
-                        .WithMany("Sentiments")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Category");
-                });
-
-            modelBuilder.Entity("SentimentAnalysisResult", b =>
-                {
-                    b.HasOne("Sentiment", "Sentiment")
-                        .WithOne("AnalysisResult")
-                        .HasForeignKey("SentimentAnalysisResult", "SentimentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Sentiment");
-                });
-
-            modelBuilder.Entity("SentimentTag", b =>
-                {
-                    b.HasOne("Sentiment", "Sentiment")
-                        .WithMany("SentimentTags")
-                        .HasForeignKey("SentimentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Tag", "Tag")
-                        .WithMany("SentimentTags")
-                        .HasForeignKey("TagId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Sentiment");
-
-                    b.Navigation("Tag");
-                });
-
-            modelBuilder.Entity("Category", b =>
-                {
-                    b.Navigation("Sentiments");
-                });
-
-            modelBuilder.Entity("Sentiment", b =>
-                {
-                    b.Navigation("AnalysisResult")
-                        .IsRequired();
-
-                    b.Navigation("SentimentTags");
-                });
-
-            modelBuilder.Entity("Tag", b =>
-                {
-                    b.Navigation("SentimentTags");
                 });
 #pragma warning restore 612, 618
         }

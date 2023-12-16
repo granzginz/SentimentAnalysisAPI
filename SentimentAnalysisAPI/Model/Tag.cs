@@ -4,5 +4,5 @@ public class Tag
     public string Name { get; set; }
 
     // Many-to-Many Relationship
-    public List<SentimentTag> SentimentTags { get; set; }
+    //public List<SentimentTag> SentimentTags { get; set; }
 }

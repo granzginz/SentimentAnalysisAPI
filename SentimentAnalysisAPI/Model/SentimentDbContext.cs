@@ -10,9 +10,9 @@ public class SentimentDbContext : DbContext
     public DbSet<Tag> Tags { get; set; }
     public DbSet<SentimentTag> SentimentTags { get; set; }
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        
-        base.OnModelCreating(modelBuilder);
-    }
+   // protected override void OnModelCreating(ModelBuilder modelBuilder)
+  //  {
+   //     
+    //    base.OnModelCreating(modelBuilder);
+    //}
 }
